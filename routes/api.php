@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['api']], function () {
+    require 'api/v1/guest/auth.php';
 });
