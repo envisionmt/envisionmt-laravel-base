@@ -28,7 +28,6 @@ class UserSeeder extends Seeder
         $admin->roles()->attach($adminRole->id);
         User::factory()
             ->count(10)
-            ->hasPosts(5)
             ->create()->each(function ($user) {
                 $roles = Role::where('name', 'user')->get()->pluck('id');
                 $user->roles()->attach($roles);

@@ -17,9 +17,6 @@ class CategorySeeder extends Seeder
     {
         Category::factory()
             ->count(10)
-            ->create()->each(function ($category) {
-                $randomPosts = Post::all()->random(rand(0, 4))->pluck('id');
-                $category->posts()->attach($randomPosts);
-            });
+            ->create();
     }
 }
