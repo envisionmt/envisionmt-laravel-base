@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use Uuids;
-    use Sluggable;
     use HasFactory;
     /**
      * The attributes that are mass assignable.

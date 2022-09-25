@@ -33,4 +33,11 @@ class Role extends Model
      */
     protected $hidden = [
     ];
+
+    public function users()
+    {
+        return $this->belongstoMany(User::class, 'user_id');
+    }
+
+
 }

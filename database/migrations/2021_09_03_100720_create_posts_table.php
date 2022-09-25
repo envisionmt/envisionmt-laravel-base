@@ -17,7 +17,6 @@ class CreatePostsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('author_id');
             $table->string('title');
-            $table->string('slug');
             $table->string('image')->nullable();
             $table->text('content');
 
