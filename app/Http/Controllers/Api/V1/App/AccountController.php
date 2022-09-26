@@ -10,8 +10,6 @@ class AccountController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('role:user');
     }
 
     public function index()

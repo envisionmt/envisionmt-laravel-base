@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Requests\Api\V1\Auth;
+namespace App\Http\Requests\Api\V1\Admin\Guest;
 
 
 use App\Http\Requests\Api\ApiFormRequest;
@@ -19,6 +19,8 @@ class LoginRequest extends ApiFormRequest
         return [
             'email' => 'required|email',
             'password' => 'required',
+            'device_name' => 'required',
+
         ];
     }
 }

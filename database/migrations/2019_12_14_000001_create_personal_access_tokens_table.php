@@ -17,6 +17,7 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->uuid('id')->primary();
             $table->uuidMorphs('tokenable');
             $table->string('name');
+            $table->string('device_id')->nullable();
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();

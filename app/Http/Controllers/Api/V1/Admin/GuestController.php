@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Api\ApiController;
 
-class UserController extends ApiController
+class GuestController extends ApiController
 {
     public function __construct()
     {

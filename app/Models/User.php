@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Uuids;
 
+    const ADMIN_ROLE = 1;
+    const USER_ROLE = 2;
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -47,41 +50,29 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'author_id');
     }
 
-    public function roles()
+    /**
+     * Role name
+     *
+     * @var string[]
+     */
+    public static $roleNames = [
+        self::ADMIN_ROLE => 'Admin',
+        self::USER_ROLE => 'User',
+    ];
+
+    /**
+     * Get role_name attribute
+     *
+     * @return string|null
+     */
+    public function getRoleNameAttribute()
     {
-        return $this->belongstoMany(Role::class);
+        if (!isset($this->role)) {
+            return null;
+        }
+
+        return self::$roleNames[$this->role];
     }
 
-    public function authorizeRoles($roles)
-    {
-        if ($this->hasAnyRole($roles)) {
-            return true;
-        }
-        abort(401, 'This action is unauthorized.');
-    }
-
-    public function hasAnyRole($roles)
-    {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
-                    return true;
-                }
-            }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function hasRole($role)
-    {
-        if ($this->roles()->where('name', $role)->first()) {
-            return true;
-        }
-        return false;
-    }
 
 }

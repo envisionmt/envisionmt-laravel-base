@@ -4,9 +4,9 @@
 namespace Database\Seeders;
 
 
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -22,15 +22,11 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'email_verified_at' => now(),
             'password' => app('hash')->make('t0ny@2022'),
-            'remember_token' => null
+            'role' => User::ADMIN_ROLE,
+            'remember_token' => Str::random(10),
         ]);
-        $adminRole = Role::where('name', 'admin')->first();
-        $admin->roles()->attach($adminRole->id);
         User::factory()
             ->count(10)
-            ->create()->each(function ($user) {
-                $roles = Role::where('name', 'user')->get()->pluck('id');
-                $user->roles()->attach($roles);
-            });
+            ->create();
     }
 }

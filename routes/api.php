@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['api']], function () {
-    require 'api/v1/guest/auth.php';
-});
+Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1', 'middleware' => ['api']], function () {
+    Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => '.admin'], function () {
+        require 'api/v1/admin/guest.php';
+        Route::group(['middleware' => ['auth:sanctum']], function () {
+        });
+    });
 
-Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['auth:sanctum']], function () {
+    Route::group(['namespace' => 'App', 'prefix' => 'app', 'as' => '.app'], function () {
+        require 'api/v1/app/guest.php';
+        Route::group(['middleware' => ['auth:sanctum']], function () {
+        });
+    });
 });
