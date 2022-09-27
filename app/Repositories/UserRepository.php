@@ -17,6 +17,7 @@ class UserRepository extends BaseRepository
         'id' => ['column' => 'users.id', 'operator' => '='],
         'name' => ['column' => 'users.name', 'operator' => 'like'],
         'email' => ['column' => 'users.email', 'operator' => 'like'],
+        'role' => ['column' => 'users.role', 'operator' => '='],
     ];
 
 

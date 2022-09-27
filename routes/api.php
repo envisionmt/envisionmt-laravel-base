@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1', 'mid
         require 'api/v1/admin/guest.php';
         Route::group(['middleware' => ['auth:sanctum', 'role:' . \App\Models\User::ADMIN_ROLE]], function () {
             require 'api/v1/admin/account.php';
+            require 'api/v1/admin/user.php';
         });
     });
 
