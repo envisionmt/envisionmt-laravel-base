@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1\App;
 
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\Api\V1\Auth\LoginRequest;
+use App\Http\Requests\Api\V1\App\Guest\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
