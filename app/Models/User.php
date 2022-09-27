@@ -6,7 +6,9 @@ use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\NewAccessToken;
 
 class User extends Authenticatable
 {
@@ -72,6 +74,19 @@ class User extends Authenticatable
         }
 
         return self::$roleNames[$this->role];
+    }
+
+    public function createToken(string $name, int $deviceType = null, string $deviceId = null, array $abilities = ['*'])
+    {
+        $token = $this->tokens()->create([
+            'name'      => $name,
+            'token'     => hash('sha256', $plainTextToken = Str::random(40)),
+            'abilities' => $abilities,
+            'device_id'   => $deviceId,
+            'device_type'   => $deviceType,
+        ]);
+
+        return new NewAccessToken($token, $token->getKey().'|'.$plainTextToken);
     }
 
 
