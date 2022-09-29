@@ -29,7 +29,7 @@ class GuestController extends ApiController
         $user = $this->userRepository->where('email', $attributes['email'])->where('role', User::ADMIN_ROLE)->first();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
+        return $this->successResponse([
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
