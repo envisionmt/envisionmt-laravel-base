@@ -21,7 +21,7 @@ class GuestController extends ApiController
 
     public function login(LoginRequest $request)
     {
-        $attributes = $request->only(['email', 'password']);
+        $attributes = $request->only(array_keys($request->rules()));
         if (!Auth::attempt($attributes)) {
             return $this->errorResponse('Invalid login details', Response::HTTP_UNAUTHORIZED);
         }

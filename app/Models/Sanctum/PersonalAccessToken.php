@@ -19,6 +19,7 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
         'token',
         'abilities',
         'device_id',
+        'device_token',
         'device_type',
     ];
 }

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'email',
         'role',
         'password',
+        'timezone'
     ];
 
     /**
@@ -80,13 +81,14 @@ class User extends Authenticatable
         return self::$roleNames[$this->role];
     }
 
-    public function createToken(string $name, int $deviceType = null, string $deviceId = null, array $abilities = ['*'])
+    public function createToken(string $name, int $deviceType = null, string $deviceId = null, string $deviceToken = null, array $abilities = ['*'])
     {
         $token = $this->tokens()->create([
             'name'      => $name,
             'token'     => hash('sha256', $plainTextToken = Str::random(40)),
             'abilities' => $abilities,
             'device_id'   => $deviceId,
+            'device_token'   => $deviceToken,
             'device_type'   => $deviceType,
         ]);
 

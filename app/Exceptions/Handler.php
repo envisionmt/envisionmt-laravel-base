@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,7 +44,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if($request->expectsJson()) {
+        if($request->isJson()) {
             if ($exception instanceof HttpException) {
                 $code = $exception->getStatusCode();
                 $message = Response::$statusTexts[$code];
@@ -62,6 +63,9 @@ class Handler extends ExceptionHandler
             }
             if ($exception instanceof DecryptException) {
                 return $this->errorResponse($exception->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            if ($exception instanceof RouteNotFoundException) {
+                return $this->errorResponse($exception->getMessage(), Response::HTTP_NOT_FOUND);
             }
             if ($exception instanceof ClientException) {
                 $message = $exception->getResponse()->getBody();

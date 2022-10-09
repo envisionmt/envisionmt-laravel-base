@@ -17,4 +17,10 @@ class AccountController extends ApiController
     {
         return $this->successResponse($request->user());
     }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return $this->successResponse(true);
+    }
 }

@@ -17,9 +17,11 @@ class LoginRequest extends ApiFormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
+            'name' => 'required',
+            'device_type' => 'required',
+            'device_id' => 'required',
+            'device_token' => 'required',
+            'timezone' => 'required'
         ];
     }
 }
