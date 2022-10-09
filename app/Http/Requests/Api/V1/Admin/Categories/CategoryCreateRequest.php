@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Requests\Api\Admin\Categories;
+namespace App\Http\Requests\Api\V1\Admin\Categories;
 
 
 use Illuminate\Foundation\Http\FormRequest;

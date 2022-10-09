@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Http\Requests\Api\V1\Admin\Categories;
+namespace App\Http\Requests\Api\V1\Admin\Commons;
 
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryUpdateRequest extends FormRequest
+class UploadImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +27,7 @@ class CategoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:255',
-            'description' => 'nullable',
-            'image' => 'required|max:255',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }
