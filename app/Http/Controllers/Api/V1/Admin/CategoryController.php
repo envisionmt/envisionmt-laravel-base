@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Api\V1\Admin\Categories\CategoryCreateRequest;
 use App\Http\Requests\Api\V1\Admin\Categories\CategoryUpdateRequest;
+use App\Http\Requests\Api\V1\Admin\Commons\DeleteByIdsRequest;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
@@ -48,6 +49,13 @@ class CategoryController extends ApiController
     public function delete(Request $request, string $id)
     {
         $this->categoryRepository->deleteById($id);
+        return $this->successResponse(true);
+    }
+
+    public function deleteByIds(DeleteByIdsRequest $request)
+    {
+        $ids = $request->get('ids');
+        $this->categoryRepository->deleteByIds($ids);
         return $this->successResponse(true);
     }
 }

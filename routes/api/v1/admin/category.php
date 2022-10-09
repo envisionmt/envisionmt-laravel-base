@@ -10,4 +10,5 @@ Route::group([
     Route::get('/{id}', [CategoryController::class, 'show']);
     Route::get('/', [CategoryController::class, 'index']);
     Route::delete('/{id}', [CategoryController::class, 'delete']);
+    Route::delete('/', [CategoryController::class, 'deleteByIds']);
 });
