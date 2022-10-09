@@ -6,4 +6,5 @@ Route::group([
     'prefix' => 'account',
 ], function () {
     Route::get('/profile', [AccountController::class, 'profile']);
+    Route::post('/logout', [AccountController::class, 'logout']);
 });
