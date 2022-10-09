@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +19,7 @@ Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1', 'mid
         Route::group(['middleware' => ['auth:sanctum', 'role:' . \App\Models\User::ADMIN_ROLE]], function () {
             require 'api/v1/admin/account.php';
             require 'api/v1/admin/user.php';
+            require 'api/v1/admin/category.php';
             require 'api/v1/admin/common.php';
         });
     });
