@@ -13,9 +13,6 @@ use Illuminate\Http\Response;
 class ApiFormRequest extends FormRequest
 {
     use ApiResponser;
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException($this->errorResponse($validator->getMessageBag(), Response::HTTP_UNPROCESSABLE_ENTITY));
-    }
+
 
 }

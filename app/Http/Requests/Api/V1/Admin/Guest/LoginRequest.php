@@ -4,9 +4,9 @@
 namespace App\Http\Requests\Api\V1\Admin\Guest;
 
 
-use App\Http\Requests\Api\ApiFormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends ApiFormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
