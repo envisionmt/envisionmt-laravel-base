@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Api\\V1', 'prefix' => 'v1', 'as' => 'api.v1', 'middleware' => ['api']], function () {
+    Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => '.admin'], function () {
+        require 'api/v1/admin/guest.php';
+        Route::group(['middleware' => ['auth:sanctum', 'role:' . \App\Models\User::ADMIN_ROLE]], function () {
+            require 'api/v1/admin/account.php';
+            require 'api/v1/admin/user.php';
+            require 'api/v1/admin/category.php';
+            require 'api/v1/admin/common.php';
+        });
+    });
+
+    Route::group(['namespace' => 'App', 'prefix' => 'app', 'as' => '.app'], function () {
+        require 'api/v1/app/guest.php';
+        Route::group(['middleware' => ['auth:sanctum', 'role:' . \App\Models\User::USER_ROLE]], function () {
+        });
+    });
 });
